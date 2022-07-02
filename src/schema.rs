@@ -3,6 +3,6 @@ table! {
         id -> Integer,
         title -> Text,
         description -> Text,
-        is_done -> Nullable<Integer>,
+        is_done -> Bool,
     }
 }
