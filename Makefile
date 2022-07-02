@@ -1,13 +1,20 @@
 MIGRATE_ARG = create_todos
 
 orm_setup:
-	diesel setup
+	diesel setup --database-url ./db/sample.db
 
-diesel_generate:
-	diesel migration generate ${MIGRATE_ARG}
+orm_generate:
+	mkdir -p db && diesel migration generate ${MIGRATE_ARG} --database-url ./db/sample.db
 
-diesel_migrate:
-	diesel migration run
+orm_migrate:
+	mkdir -p db && diesel migration run --database-url ./db/sample.db
+
+orm_revert:
+	diesel migration revert --database-url ./db/sample.db
+
+orm_remigrate:
+	make orm_revert
+	make orm_migrate
 
 build:
 	cargo build
